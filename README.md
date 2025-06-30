@@ -363,7 +363,7 @@ A sample scene (`LinearRegressionTest.scene`) was built to demonstrate real-time
 
 ---
 
-## 🎯 RTML vs Existing ML Tools
+## RTML vs Existing ML Tools
 
 While various tools exist for interactive or creative machine learning workflows, none offer a fully Unity-native, runtime-safe supervised ML pipeline. Below is a comparison of commonly cited alternatives:
 
@@ -379,21 +379,21 @@ While various tools exist for interactive or creative machine learning workflows
 
 ---
 
-## 📌 What Makes RTML Tool Kit Unique?
+## What Makes RTML Tool Kit Unique?
 
-✅ **Unity-native**  
+**Unity-native**  
 All training, inference, and model management are handled directly through the Unity Inspector. No external software, no GUI bridges, no extra scripts required.
 
-✅ **Runtime-capable**  
+**Runtime-capable**  
 Unlike Wekinator or RunwayML, RTML allows training and inference while the application is running. Models can be trained live and saved/loaded during runtime.
 
-✅ **OSC Input/Output**  
+**OSC Input/Output**  
 Bidirectional OSC communication enables seamless integration with creative tools like TouchDesigner, Max/MSP, and even modular synth environments.
 
-✅ **Mobile & XR-Ready**  
+**Mobile & XR-Ready**  
 Designed for Unity’s Android pipeline — including Meta Quest MR builds. Models and logic are deployable via `.apk` without any desktop dependency.
 
-✅ **No Code Required**  
+**No Code Required**  
 Artists and non-programmers can use `RTMLRunner.prefab` with the custom Inspector UI to train models without writing a single line of code.
 
 ---
