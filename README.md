@@ -400,7 +400,7 @@ Artists and non-programmers can use `RTMLRunner.prefab` with the custom Inspecto
 
 By combining Unity-native execution, runtime model control, and external OSC support, RTML Tool Kit fills a critical gap in real-time ML workflows for mobile, MR, and interactive art installations.
 
-## 8. Conclusion & Future Work
+## 7. Conclusion & Future Work
 
 RTML Tool Kit presents a viable direction for GUI-free, real-time ML in Unity, enabling new workflows in mobile and XR contexts. Future directions include:
 
