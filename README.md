@@ -40,8 +40,8 @@ Assets/
 
 1. Import RTML Tool Kit into your Unity project  
 2. Create a GameObject and add the `RTMLCore` script  
-3. Configure `inputSize`, `outputSize`, and `modelType` in the Inspector  
-4. Feed input data manually or via OSC  
+3. Configure `inputSize`, `outputSize`, and `modelType` in the Inspector (`RTMLCore.cs`)
+4. Feed input data manually or via OSC
 5. Use Inspector toggles to Record → Train → Run  
 6. Use the buttons “Save Model” and “Load Model” to persist models across sessions
 
@@ -189,7 +189,7 @@ RTML turns numbers into intelligence — so your game objects don’t have to be
 |-------------------|----------------------------------|------------------------------|
 | LinearRegression  | Continuous regression            | Fast and lightweight         |
 | KNNClassifier     | Classification or regression     | Memory-based, non-parametric |
-| DTWRecognizer     | Gesture/time-series matching     | Placeholder, extendable      |
+| DTWRecognizer     | Gesture/time-series matching     | Fast and lightweight         |
 
 All models implement the `IModel` interface with consistent `Train()` and `Predict()` methods.
 
@@ -328,7 +328,7 @@ Models can be swapped at runtime, and serialised via Unity's `JsonUtility` to `A
 |------------------|----------------|--------------------------------|----------------|
 | LinearRegression | Supervised     | Continuous regression          | ✅ Fully tested |
 | KNNClassifier    | Supervised     | Lazy classification/regression | ⚠ Integrated only |
-| DTWRecognizer    | Sequence-based | Temporal gesture recognition   | ⚠ Placeholder |
+| DTWRecognizer    | Sequence-based | Temporal gesture recognition   |  ✅ Fully tested |
 
 All models conform to a shared `IModel` interface and are selectable via an Inspector dropdown.  
 Only `LinearRegression` has been evaluated in real runtime scenarios thus far.
