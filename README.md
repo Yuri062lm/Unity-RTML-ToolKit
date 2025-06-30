@@ -47,6 +47,93 @@ Assets/
 
 ---
 
+## 🧠 How to Use RTML Tool Kit (For Absolute Beginners)
+
+This tool lets you teach your game objects how to learn and react — with zero coding required. Here's how:
+
+---
+
+### 🟢 Step 1 — Add RTML to Your Scene
+
+1. Open your Unity project.
+2. Go to **Assets/RTMLToolKit/Runtime/**.
+3. Drag the **RTMLRunner.prefab** into your scene.
+
+Boom! RTML is now active.
+
+---
+
+### 🎚 Step 2 — Feed It Some Input
+
+You need to send numbers to RTML so it can learn.
+
+You can:
+- Connect it to sliders, sensors, or code.
+- Or, just modify `SphereController.cs` in the **ExampleScene** to simulate input.
+
+Your input must be a list of numbers (e.g., `[0.5, 0.2, 0.9]`).
+
+---
+
+### 📊 Step 3 — Choose a Model
+
+In the **Inspector** of `RTMLRunner`, you'll see a dropdown called:
+
+> `Model Type`
+
+Pick one:
+- `LinearRegression` (best for smooth control)
+- `KNNClassifier` (great for categories)
+- `DTWRecognizer` (best for gestures or time-based input)
+
+---
+
+### 🎓 Step 4 — Train the Model
+
+Still in Inspector:
+1. Click **Record** — move the object, send input, etc.
+2. Choose a **Label** (e.g., “jump”, “left”, “red”).
+3. Click **Add Sample**.
+4. Repeat for as many labels as you want.
+5. Click **Train** — the model learns!
+
+---
+
+### 🧪 Step 5 — Use It in Runtime
+
+1. Hit **Play**.
+2. RTML will analyse the input in real-time and output a result.
+3. You can use `RTMLCore.Output` to drive game logic, move objects, trigger events, and more.
+
+---
+
+### 💾 Step 6 — Save or Load Model
+
+- To save:
+  1. Type a name (e.g., `MyTrainedModel`) in the **Save/Load** field.
+  2. Click **Save Model**.
+
+- To load:
+  1. Type the same name.
+  2. Click **Load Model**.
+
+Your model is now persistent and works across sessions.
+
+---
+
+### 💡 TL;DR
+
+✅ Drag RTMLRunner  
+✅ Choose a model  
+✅ Record → Add Samples → Train  
+✅ Hit Play and react to output  
+✅ Save model for next time
+
+---
+
+RTML turns numbers into intelligence — so your game objects don’t have to be dumb anymore.
+
+
 ## 💡 Supported Models
 
 | Model Type        | Use Case                        | Notes                        |
@@ -61,24 +148,70 @@ All models implement the `IModel` interface with consistent `Train()` and `Predi
 
 ## 💾 Saving & Loading Models
 
-You can persist model state at runtime:
+RTML Tool Kit allows you to persist trained model data and reuse it later — both during development and in runtime builds.  
+You can save and load models either through **Unity Inspector** or via **C# code**.
 
-```csharp
-core.SaveModel("myModel");
-core.LoadModel("myModel");
-```
+---
 
-Files are saved in:
+### 🔧 Option 1 — Using the Unity Inspector (No Coding Required)
+
+1. **Add `RTMLCore` component** to any GameObject (or use the one attached to `RTMLRunner.prefab`).
+2. In the **Inspector**, scroll to the section titled `Model Save/Load`.
+3. Type a model name in the input field (e.g., `myModel`).
+4. Click **Save Model** to export the current trained state.
+5. Click **Load Model** to restore a previously saved model.
+
+Saved model files will appear under:
+
 ```
 Assets/RTMLToolKit/SavedModels/
 ```
 
-Depending on model type, serialised data includes:
-- LinearRegression: weights and biases
-- KNN: training samples
-- DTW: template sequences
+If the file exists, it will be loaded instantly. If not, you'll see a warning in the Console.
 
 ---
+
+### 🧑‍💻 Option 2 — Saving & Loading via Script
+
+You can also control saving/loading behaviour programmatically:
+
+```csharp
+RTMLCore core = GetComponent<RTMLCore>();
+
+// Save current model state
+core.SaveModel("myModel");
+
+// Load previously saved state
+core.LoadModel("myModel");
+```
+
+> If no name is passed, a default fallback name will be used (e.g., `"defaultModel"`).
+
+---
+
+### 📦 What Gets Saved?
+
+The exact contents depend on the model type:
+
+| Model Type       | Saved Data Description                        |
+|------------------|-----------------------------------------------|
+| Linear Regression | Weight vector and bias                        |
+| KNN Classifier    | All training samples and associated labels    |
+| DTW Recogniser    | Template time-series gestures (per label)     |
+
+Models are serialised as `.json` files and can be inspected or version-controlled if needed.
+
+---
+
+### ⚠️ Notes & Best Practices
+
+- Always ensure your `RTMLRunner` prefab is active in the scene.
+- For mobile platforms, make sure persistent data paths are correctly mapped when building runtime save/load functionality.
+- Overwriting files will replace previous training data.
+
+---
+
+This system allows a seamless workflow where training once is enough — even across sessions, devices, and builds.
 
 ## 🌐 OSC Integration
 
