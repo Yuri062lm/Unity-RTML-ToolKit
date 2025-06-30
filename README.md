@@ -109,15 +109,7 @@ Still in Inspector:
 
 ### 💾 Step 6 — Save or Load Model
 
-- To save:
-  1. Type a name (e.g., `MyTrainedModel`) in the **Save/Load** field.
-  2. Click **Save Model**.
 
-- To load:
-  1. Type the same name.
-  2. Click **Load Model**.
-
-Your model is now persistent and works across sessions.
 
 ---
 
@@ -129,24 +121,6 @@ Your model is now persistent and works across sessions.
 ✅ Hit Play and react to output  
 ✅ Save model for next time
 
----
-
-RTML turns numbers into intelligence — so your game objects don’t have to be dumb anymore.
-
-
-## 💡 Supported Models
-
-| Model Type        | Use Case                        | Notes                        |
-|-------------------|----------------------------------|------------------------------|
-| LinearRegression  | Continuous regression            | Fast and lightweight         |
-| KNNClassifier     | Classification or regression     | Memory-based, non-parametric |
-| DTWRecognizer     | Gesture/time-series matching     | Placeholder, extendable      |
-
-All models implement the `IModel` interface with consistent `Train()` and `Predict()` methods.
-
----
-
-## 💾 Saving & Loading Models
 
 RTML Tool Kit allows you to persist trained model data and reuse it later — both during development and in runtime builds.  
 You can save and load models either through **Unity Inspector** or via **C# code**.
@@ -200,6 +174,24 @@ The exact contents depend on the model type:
 | DTW Recogniser    | Template time-series gestures (per label)     |
 
 Models are serialised as `.json` files and can be inspected or version-controlled if needed.
+
+---
+
+
+---
+
+RTML turns numbers into intelligence — so your game objects don’t have to be dumb anymore.
+
+
+## 💡 Supported Models
+
+| Model Type        | Use Case                        | Notes                        |
+|-------------------|----------------------------------|------------------------------|
+| LinearRegression  | Continuous regression            | Fast and lightweight         |
+| KNNClassifier     | Classification or regression     | Memory-based, non-parametric |
+| DTWRecognizer     | Gesture/time-series matching     | Placeholder, extendable      |
+
+All models implement the `IModel` interface with consistent `Train()` and `Predict()` methods.
 
 ---
 
