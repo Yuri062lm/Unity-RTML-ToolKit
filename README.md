@@ -46,7 +46,7 @@ Assets/
 6. Use the buttons “Save Model” and “Load Model” to persist models across sessions
 
 ---
-Voice Controller Demonstration: https://youtu.be/L1AZWkIZCNk
+[![Voice Controller Demonstration](https://img.youtube.com/vi/L1AZWkIZCNk/hqdefault.jpg)](https://youtu.be/L1AZWkIZCNk)
 ---
 
 ## 🧠 How to Use RTML Tool Kit (For Absolute Beginners)
