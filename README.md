@@ -1,4 +1,4 @@
-# Unity - RTML Tool Kit **Real-Time Machine Learning Framework for Unity**  
+# Unity - RTML Tool Kit: **A Real-Time Machine Learning Framework for Unity**  
 
 
 Lightweight, modular, and open-source. Designed for live performance, Mixed Reality, and mobile deployment.
