@@ -1,5 +1,5 @@
 /*
- * SphereController.cs
+ * SphereControllerSliders.cs
  *
  * Reads 5 UI sliders each frame, feeds the values into RTMLCore,
  * then applies the 12-element output vector as RGBA to 3 sphere materials.
@@ -12,7 +12,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using RTMLToolKit;
 
-public class SphereController : MonoBehaviour
+public class SphereControllerSliders : MonoBehaviour
 {
     [Header("References")]
     [Tooltip("Reference to your RTMLRunner's RTMLCore component.")]

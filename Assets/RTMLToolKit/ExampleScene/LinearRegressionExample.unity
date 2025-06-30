@@ -2880,6 +2880,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2060526041}
   - component: {fileID: 2060526040}
+  - component: {fileID: 2060526042}
   m_Layer: 0
   m_Name: SphereController
   m_TagString: Untagged
@@ -2935,6 +2936,31 @@ Transform:
   - {fileID: 1520506988}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2060526042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2060526039}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffed700189f124121b7f2c8be1b9643a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rtmlCore: {fileID: 2112753283}
+  sphereMat: {fileID: 2100000, guid: 3b2733d9bcde34b17a5479f52fd6d69d, type: 2}
+  inspectorColour: {r: 1, g: 1, b: 1, a: 1}
+  silenceColour: {r: 0.5943396, g: 0.5943396, b: 0.5943396, a: 1}
+  micDeviceIndex: 0
+  micDevice: 
+  micVolume: 1
+  audioInputSize: 1024
+  noiseThreshold: 0.0005
+  startRecordKey: 114
+  stopRecordKey: 115
+  trainKey: 116
+  predictKey: 112
 --- !u!1001 &2112753282
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2992,8 +3018,16 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4790591542062550009, guid: c712748a1f7074be5927b30c402bec2a, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4790591542062550009, guid: c712748a1f7074be5927b30c402bec2a, type: 3}
+      propertyPath: modelType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4790591542062550009, guid: c712748a1f7074be5927b30c402bec2a, type: 3}
       propertyPath: outputSize
-      value: 12
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4790591542062550009, guid: c712748a1f7074be5927b30c402bec2a, type: 3}
       propertyPath: enableTrain
@@ -3006,6 +3040,10 @@ PrefabInstance:
     - target: {fileID: 4790591542062550009, guid: c712748a1f7074be5927b30c402bec2a, type: 3}
       propertyPath: modelFileName
       value: testModel01
+      objectReference: {fileID: 0}
+    - target: {fileID: 4790591542062550009, guid: c712748a1f7074be5927b30c402bec2a, type: 3}
+      propertyPath: dtwSimilarityThreshold
+      value: 0.43
       objectReference: {fileID: 0}
     - target: {fileID: 7160060507380491290, guid: c712748a1f7074be5927b30c402bec2a, type: 3}
       propertyPath: m_Name

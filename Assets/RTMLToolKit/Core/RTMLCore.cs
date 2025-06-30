@@ -48,6 +48,7 @@ namespace RTMLToolKit
     {
         public int inputSize;
         public int outputSize;
+        public float similarityThreshold; // EKLENDI: Eşleşme eşiği
         public List<List<float>> templates;
         public List<List<float>> templateOutputs;
     }
@@ -70,6 +71,10 @@ namespace RTMLToolKit
         [Header("Model Settings")]
         [Tooltip("Type of model to use: LinearRegression, KNN, or DTW.")]
         public ModelType modelType = ModelType.LinearRegression;
+
+        [Header("DTW Settings")] // EKLENDI: DTW'ye özel ayarlar bölümü
+        [Tooltip("Similarity threshold for DTW matching. A lower distance means a better match. If the best match distance is above this threshold, it is rejected. Higher values make matching easier.")]
+        public float dtwSimilarityThreshold = 100.0f;
 
         [Header("Modes")]
         [Tooltip("Enable recording of incoming samples.")]
@@ -107,7 +112,7 @@ namespace RTMLToolKit
         //--------------- Internal References ---------------//
 
         private SampleBuffer sampleBuffer;
-        private IModel model;
+        internal IModel model;
         private OSCReceiver oscReceiver;
         private OSCSender oscSender;
 
@@ -152,7 +157,10 @@ namespace RTMLToolKit
                     model = new KNNClassifier(inputSize, outputSize);
                     break;
                 case ModelType.DTW:
-                    model = new DTWRecognizer(inputSize, outputSize);
+                    // DTWRecognizer'ın bu eşiği kullanmak için güncellendiği varsayılır.
+                    var dtw = new DTWRecognizer(inputSize, outputSize);
+                    dtw.similarityThreshold = dtwSimilarityThreshold;
+                    model = dtw;
                     break;
                 default:
                     model = new LinearRegression(inputSize, outputSize);
@@ -166,13 +174,13 @@ namespace RTMLToolKit
         private void SetUpOsc()
         {
             oscReceiver = gameObject.GetComponent<OSCReceiver>() ?? gameObject.AddComponent<OSCReceiver>();
-            oscSender   = gameObject.GetComponent<OSCSender>()   ?? gameObject.AddComponent<OSCSender>();
+            oscSender = gameObject.GetComponent<OSCSender>() ?? gameObject.AddComponent<OSCSender>();
 
             oscReceiver.Initialize(oscInPort);
             oscReceiver.Bind(oscInputAddress, DirectOnData);
             oscReceiver.Bind("/rtml/control/record", (addr, val) => enableRecord = val > 0.5f);
-            oscReceiver.Bind("/rtml/control/train",  (addr, val) => { if (val > 0.5f) TrainModel(); });
-            oscReceiver.Bind("/rtml/control/run",    (addr, val) => enableRun    = val > 0.5f);
+            oscReceiver.Bind("/rtml/control/train", (addr, val) => { if (val > 0.5f) TrainModel(); });
+            oscReceiver.Bind("/rtml/control/run", (addr, val) => enableRun = val > 0.5f);
 
             oscSender.Initialize(oscOutIP, oscOutPort);
 
@@ -214,12 +222,12 @@ namespace RTMLToolKit
             var lr = model as LinearRegression;
             var data = new LinearRegressionData
             {
-                inputSize    = inputSize,
-                outputSize   = outputSize,
+                inputSize = inputSize,
+                outputSize = outputSize,
                 learningRate = lr.learningRate,
-                iterations   = lr.iterations,
-                bias         = (float[])lr.bias.Clone(),
-                weights      = new float[outputSize * inputSize]
+                iterations = lr.iterations,
+                bias = (float[])lr.bias.Clone(),
+                weights = new float[outputSize * inputSize]
             };
 
             // Flatten row-major into weights[]
@@ -236,10 +244,10 @@ namespace RTMLToolKit
             var knn = model as KNNClassifier;
             var data = new KNNData
             {
-                inputSize    = inputSize,
-                outputSize   = outputSize,
-                k            = knn.k,
-                trainInputs  = new List<List<float>>(),
+                inputSize = inputSize,
+                outputSize = outputSize,
+                k = knn.k,
+                trainInputs = new List<List<float>>(),
                 trainOutputs = new List<List<float>>()
             };
             foreach (var inp in knn.trainInputs)
@@ -256,9 +264,10 @@ namespace RTMLToolKit
             var dtw = model as DTWRecognizer;
             var data = new DTWData
             {
-                inputSize       = inputSize,
-                outputSize      = outputSize,
-                templates       = new List<List<float>>(),
+                inputSize = inputSize,
+                outputSize = outputSize,
+                similarityThreshold = dtw.similarityThreshold, // DEĞİŞTİRİLDİ: Eşiği kaydet
+                templates = new List<List<float>>(),
                 templateOutputs = new List<List<float>>()
             };
             foreach (var t in dtw.templates)
@@ -348,7 +357,7 @@ namespace RTMLToolKit
 
             var knn = new KNNClassifier(data.inputSize, data.outputSize, data.k)
             {
-                trainInputs  = new List<float[]>(data.trainInputs.Count),
+                trainInputs = new List<float[]>(data.trainInputs.Count),
                 trainOutputs = new List<float[]>(data.trainOutputs.Count)
             };
 
@@ -373,6 +382,11 @@ namespace RTMLToolKit
             }
 
             var dtw = new DTWRecognizer(data.inputSize, data.outputSize);
+
+            // DEĞİŞTİRİLDİ: Eşiği yükle ve hem modele hem de Inspector alanına ata
+            dtw.similarityThreshold = data.similarityThreshold;
+            this.dtwSimilarityThreshold = data.similarityThreshold;
+
             foreach (var t in data.templates)
                 dtw.templates.Add(t.ToArray());
             foreach (var o in data.templateOutputs)
@@ -392,7 +406,7 @@ namespace RTMLToolKit
 
         public void TrainModel()
         {
-            var inputs  = sampleBuffer.GetInputs();
+            var inputs = sampleBuffer.GetInputs();
             var outputs = sampleBuffer.GetOutputs();
             if (inputs.Count == 0)
             {
@@ -428,7 +442,7 @@ namespace RTMLToolKit
         /// <summary>Delete the most recently recorded sample.</summary>
         public void DeleteLastSample()
         {
-            var inputs  = sampleBuffer.GetInputs();
+            var inputs = sampleBuffer.GetInputs();
             var outputs = sampleBuffer.GetOutputs();
             if (inputs.Count > 0)
             {
@@ -473,12 +487,24 @@ namespace RTMLToolKit
             DrawDefaultInspector();
             RTMLCore core = (RTMLCore)target;
 
+            // DEĞİŞTİRİLDİ: Modeldeki DTW eşiğinin Inspector'daki değerle senkronize olduğundan emin olun
+            if (core.modelType == ModelType.DTW)
+            {
+                if (core.model is DTWRecognizer dtwModel)
+                {
+                    if (dtwModel.similarityThreshold != core.dtwSimilarityThreshold)
+                    {
+                        dtwModel.similarityThreshold = core.dtwSimilarityThreshold;
+                    }
+                }
+            }
+
             GUILayout.Space(8);
 
             // Save / Load
             GUILayout.BeginHorizontal();
-            if (GUILayout.Button("Save Model"))   core.SaveModel(core.modelFileName);
-            if (GUILayout.Button("Load Model"))   core.LoadModel(core.modelFileName);
+            if (GUILayout.Button("Save Model")) core.SaveModel(core.modelFileName);
+            if (GUILayout.Button("Load Model")) core.LoadModel(core.modelFileName);
             GUILayout.EndHorizontal();
 
             // Delete samples
