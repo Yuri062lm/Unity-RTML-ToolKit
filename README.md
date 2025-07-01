@@ -344,7 +344,7 @@ Only `LinearRegression` has been evaluated in real runtime scenarios thus far.
 - Unity 6 on macOS (Intel chip)
 - Editor-only tests using Inspector UI
 - InputSize: 5, OutputSize: 12
-- Sample count: 50 training samples
+- Sample count: 2 training samples
 
 ### 5.2 Results (Linear Regression only)
 
